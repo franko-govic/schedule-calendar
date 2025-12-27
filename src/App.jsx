@@ -1,8 +1,14 @@
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+
 function App() {
   return (
-    <>
-      <p className="bg-red-500">HI</p>
-    </>
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Layout>
   );
 }
 
