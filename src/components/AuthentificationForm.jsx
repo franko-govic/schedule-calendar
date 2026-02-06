@@ -1,46 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { login, logout, signup, signInWithGoogle } from "../auth";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 function AuthenticationForm() {
   const [user, setUser] = useState(null);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  const handleSignup = async (values) => {
-    try {
-      await signup(values.email, values.password);
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleLogin = async (values) => {
-    try {
-      await login(values.email, values.password);
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleLogout = async () => {
-    try {
-      await logout();
-      setError("");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
 
   return (
     <div className="text-center text-lg font-semibold">
@@ -95,18 +57,18 @@ function AuthenticationForm() {
                 className="text-red-600 text-sm"
               />
 
-              <div className="flex gap-2">
+              <div className="flex gap-6">
                 <button
                   type="button"
                   onClick={() => handleSignup(values)}
-                  className="px-3 py-1 bg-green-500 text-white rounded"
+                  className="px-3 py-1 bg-green-500 text-white rounded cursor-pointer"
                 >
                   Signup
                 </button>
                 <button
                   type="button"
                   onClick={() => handleLogin(values)}
-                  className="px-3 py-1 bg-blue-500 text-white rounded"
+                  className="px-3 py-1 bg-blue-500 text-white rounded cursor-pointer"
                 >
                   Login
                 </button>
